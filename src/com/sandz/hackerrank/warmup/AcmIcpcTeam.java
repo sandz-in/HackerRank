@@ -1,14 +1,13 @@
 package com.sandz.hackerrank.warmup;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class AcmIcpcTeam {
 
     public static void main(String[] args) throws NumberFormatException,
             IOException {
+
         Scanner in = new Scanner((System.in));
         int noOfParticipants = in.nextInt();
         in.nextLine();
@@ -26,7 +25,7 @@ public class AcmIcpcTeam {
 
     private static void solve(String[] skills) {
         int maxSkills = 0;
-        Map<Integer, Integer> skillMap = new HashMap<Integer, Integer>();
+        int count = 0;
         for (int i = 0; i < skills.length; i++) {
             String skillA = skills[i];
             for (int j = i + 1; j < skills.length; j++) {
@@ -37,17 +36,16 @@ public class AcmIcpcTeam {
                         retVal++;
                     }
                 }
-                Integer count = skillMap.get(retVal);
-                if (count == null) {
-                    count = 0;
+                if (retVal > maxSkills) {
+                    count = 1;
+                    maxSkills = retVal;
+                } else if (retVal == maxSkills) {
+                    count++;
                 }
-                count++;
-                maxSkills = Math.max(maxSkills, retVal);
-                skillMap.put(retVal, count);
             }
         }
         System.out.println(maxSkills);
-        System.out.println(skillMap.get(maxSkills));
+        System.out.println(count);
     }
 
 }
