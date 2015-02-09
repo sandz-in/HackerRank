@@ -14,6 +14,7 @@ public class AlternatingCharacters {
         for (int i = 0; i < testCases; i++) {
             patterns[i] = in.nextLine();
         }
+        in.close();
         // Long start = System.currentTimeMillis();
 
         for (int i = 0; i < testCases; i++) {
