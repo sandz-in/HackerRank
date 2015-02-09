@@ -22,19 +22,17 @@ public class AngryChildren {
     public static void main(String[] args) throws NumberFormatException,
             IOException {
         Scanner in = new Scanner((System.in));
-        int numPackets = Integer.parseInt(in.nextLine());
-        int numKids = Integer.parseInt(in.nextLine());
+        int numPackets = in.nextInt();
+        int numKids = in.nextInt();
 
         List<Integer> packets = new ArrayList<Integer>();
         for (int i = 0; i < numPackets; i++) {
-            packets.add(Integer.parseInt(in.nextLine()));
+            packets.add((in.nextInt()));
         }
-        Long start = System.currentTimeMillis();
 
+        in.close();
         Collections.sort(packets);
         Integer unfairness = solve(packets, numKids);
-        Long end = System.currentTimeMillis();
-        System.out.println((end - start));
 
         System.out.println(unfairness);
     }
