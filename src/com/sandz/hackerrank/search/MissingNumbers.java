@@ -31,7 +31,7 @@ public class MissingNumbers {
         for (Integer x : bMap.keySet()) {
             Integer aCount = aMap.get(x);
             Integer bCount = bMap.get(x);
-            if (!aCount.equals(bCount)) {
+            if (!bCount.equals(aCount)) {
                 uniqueList.add(x);
             }
         }
