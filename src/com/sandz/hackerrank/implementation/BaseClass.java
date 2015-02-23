@@ -13,6 +13,13 @@ public class BaseClass {
     public StringTokenizer st;
     public PrintWriter out;
 
+    private void solve() throws IOException {
+        nextDouble();
+        nextInt();
+        nextLong();
+        printWithNewLine("");
+    }
+
     public static void main(String[] args) throws IOException {
         BaseClass solution = new BaseClass();
         solution.initialize();
@@ -32,10 +39,11 @@ public class BaseClass {
         out = new PrintWriter(output);
     }
 
-    private void solve() throws IOException {
-        nextDouble();
-        nextInt();
-        nextLong();
+    private void printWithNewLine(Object o) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(o);
+        stringBuilder.append("\n");
+        out.write(stringBuilder.toString());
     }
 
     private long nextLong() throws IOException {
