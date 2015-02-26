@@ -52,6 +52,7 @@ public class CountLuck {
         }
         if (matrix[x][y] == '*') {
             if (k == K) {
+                //Found the magic-wand route
                 return true;
             }
         }

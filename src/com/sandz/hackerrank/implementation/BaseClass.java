@@ -17,14 +17,17 @@ public class BaseClass {
         nextDouble();
         nextInt();
         nextLong();
-        printWithNewLine("");
+        println("");
     }
 
     public static void main(String[] args) throws IOException {
         BaseClass solution = new BaseClass();
-        solution.initialize();
-        solution.solve();
-        solution.close();
+        try {
+            solution.initialize();
+            solution.solve();
+        } finally {
+            solution.close();
+        }
     }
 
     private void close() throws IOException {
@@ -39,7 +42,7 @@ public class BaseClass {
         out = new PrintWriter(output);
     }
 
-    private void printWithNewLine(Object o) {
+    private void println(Object o) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(o);
         stringBuilder.append("\n");
