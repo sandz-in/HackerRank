@@ -41,7 +41,7 @@ public class Anagram {
         int[] retVal = new int[26];
         for (int i = 0; i < s1.length(); i++) {
             int pos = s1.charAt(i) - 'a';
-            retVal[pos] = retVal[pos] + 1;
+            retVal[pos]++;
         }
         return retVal;
     }
