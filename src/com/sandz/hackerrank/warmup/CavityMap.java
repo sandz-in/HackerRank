@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.implementation;
+package com.sandz.hackerrank.warmup;
 
 import java.util.Scanner;
 
