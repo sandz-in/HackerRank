@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.strings;
 
 import java.io.BufferedReader;
 import java.io.IOException;
