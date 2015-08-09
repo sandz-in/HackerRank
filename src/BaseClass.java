@@ -1,5 +1,3 @@
-package com.sandz.hackerrank.implementation;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
