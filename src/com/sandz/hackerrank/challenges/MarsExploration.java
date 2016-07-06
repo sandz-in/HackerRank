@@ -1,29 +1,36 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.challenges;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+/**
+ * https://www.hackerrank.com/contests/worldcodesprint/challenges/save-our-ship
+ * 
+ * @author sandz
+ *
+ */
+public class MarsExploration {
+
     public BufferedReader br;
     public StringTokenizer st;
-    public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        String s = nextToken();
+        int count = 0;
+        String sos = "SOS";
+        for (int i = 0, j = 0; i < s.length(); i++, j++, j %= 3) {
+            if (s.charAt(i) != sos.charAt(j)) {
+                count++;
+            }
         }
-        println(sum);
+        System.out.println(count);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        MarsExploration solution = new MarsExploration();
         try {
             solution.initialize();
             solution.solve();
@@ -34,25 +41,11 @@ public class AVeryBigSum {
 
     private void close() throws IOException {
         br.close();
-        out.close();
     }
 
     private void initialize() {
         InputStream input = System.in;
         br = new BufferedReader(new InputStreamReader(input));
-        PrintStream output = System.out;
-        out = new PrintWriter(output);
-    }
-
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
-    }
-
-    private int nextInt() throws IOException {
-        return Integer.parseInt(nextToken());
     }
 
     private String nextToken() throws IOException {
@@ -65,4 +58,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

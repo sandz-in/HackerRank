@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.datastructures.arrays;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,40 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class SparseArrays {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        Map<String, Integer> strings = new HashMap<String, Integer>();
+        for (int i = 0; i < n; i++) {
+            String x = nextToken();
+            Integer counter = strings.get(x);
+            if (counter == null) {
+                counter = 0;
+            }
+            strings.put(x, ++counter);
         }
-        println(sum);
+        int q = nextInt();
+        for (int i = 0; i < q; i++) {
+            String query = nextToken();
+            Integer counter = strings.get(query);
+            if (counter == null) {
+                counter = 0;
+            }
+            println(counter);
+        }
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        SparseArrays solution = new SparseArrays();
         try {
             solution.initialize();
             solution.solve();
@@ -65,4 +81,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

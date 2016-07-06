@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.challenges;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,40 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+/**
+ * https://www.hackerrank.com/contests/worldcodesprint/challenges/powerplants-in
+ * -flatland
+ * 
+ * @author sandz
+ *
+ */
+public class FlatlandSpaceStations {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int m = nextInt();
+        int a[] = new int[m];
+        for (int i = 0; i < m; i++) {
+            a[i] = nextInt();
         }
-        println(sum);
+        Arrays.sort(a);
+        int max = Math.max(a[0], n - 1 - a[m - 1]);
+        for (int i = 1; i < a.length; i++) {
+            int diff = (a[i] - a[i - 1]) / 2;
+            max = Math.max(max, diff);
+        }
+        println(max);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        FlatlandSpaceStations solution = new FlatlandSpaceStations();
         try {
             solution.initialize();
             solution.solve();
@@ -65,4 +81,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

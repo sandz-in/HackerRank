@@ -1,4 +1,7 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.graph;
+/**
+ * Created by sandz on 1/24/16.
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +11,27 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class Strings {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        String s = nextToken();
+        s = s.trim();
+        String x[] = s.split("[!,?\\._'@ ]+");
+        if(!s.equals("")) {
+            println(x.length);
+            for (int i = 0; i < x.length; i++)
+                println(x[i]);
+        }else{
+            println(0);
         }
-        println(sum);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        Strings solution = new Strings();
         try {
             solution.initialize();
             solution.solve();
@@ -51,18 +59,21 @@ public class AVeryBigSum {
         out.write(stringBuilder.toString());
     }
 
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
+    }
+
+    private double nextDouble() throws IOException {
+        return Double.parseDouble(nextToken());
+    }
+
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
 
     private String nextToken() throws IOException {
-        while (st == null || !st.hasMoreTokens()) {
             String line = br.readLine();
-            if (line == null) {
-                return null;
-            }
-            st = new StringTokenizer(line);
-        }
-        return st.nextToken();
+        return line;
     }
+
 }

@@ -92,14 +92,6 @@ public class ToyBlocks {
         out.write(stringBuilder.toString());
     }
 
-    private long nextLong() throws IOException {
-        return Long.parseLong(nextToken());
-    }
-
-    private double nextDouble() throws IOException {
-        return Double.parseDouble(nextToken());
-    }
-
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }

@@ -1,4 +1,7 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.dynamic;
+/**
+ * Created by sandz on 9/23/15.
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +9,42 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class TheCoinChangeProblem {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int m = nextInt();
+        int[] denominations = new int[m];
+        for (int i = 0; i < m; i++) {
+            denominations[i] = nextInt();
         }
-        println(sum);
+
+        Arrays.sort(denominations);
+        int[] change = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (i >= denominations[j]) {
+                    if (i - denominations[j] == 0) {
+                        change[i] += 1;
+                    } else if ((i - denominations[j]) >= denominations[j]) {
+                        change[i] += change[i - denominations[j]];
+                    }
+                }
+            }
+            out.println(i + " " + change[i]);
+        }
+        out.println(change[n]);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        TheCoinChangeProblem solution = new TheCoinChangeProblem();
         try {
             solution.initialize();
             solution.solve();

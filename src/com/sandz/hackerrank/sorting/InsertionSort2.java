@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.sorting;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,28 +8,41 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class InsertionSort2 {
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int size = nextInt();
+        int[] a = new int[size];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = nextInt();
         }
-        println(sum);
+        for (int i=1; i < a.length; i++) {
+            int x = a[i];
+            int j=i-1;
+            while(j >= 0 && a[j]>x){
+                    a[j+1] =  a[j];
+                    j--;
+            }
+            a[j+1] = x;
+            printArray(a);
+        }
+    }
+
+    private void printArray(int[] a) {
+        for (int i : a) {
+            out.write(i + " ");
+        }
+        out.write("\n");
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
-        try {
-            solution.initialize();
-            solution.solve();
-        } finally {
-            solution.close();
-        }
+        InsertionSort2 solution = new InsertionSort2();
+        solution.initialize();
+        solution.solve();
+        solution.close();
     }
 
     private void close() throws IOException {
@@ -42,13 +55,6 @@ public class AVeryBigSum {
         br = new BufferedReader(new InputStreamReader(input));
         PrintStream output = System.out;
         out = new PrintWriter(output);
-    }
-
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
     }
 
     private int nextInt() throws IOException {

@@ -1,29 +1,58 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.datastructures.stacks;
 
+/**
+ * https://www.hackerrank.com/challenges/largest-rectangle
+ * @author sandz
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class LargestRectangleDC {
+
+    public class Tuple {
+        int min = -1;
+        int size = -1;
+        int product = -1;
+
+    }
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int[] a = nextIntArray(n);
+        Tuple maxT = calculateArea(a, 0, n - 1);
+        System.out.println(maxT.min);
+    }
+
+    private Tuple calculateArea(int[] a, int i, int j) {
+        if (i > j)
+            return new Tuple();
+
+        if(i == j){
+            // retur
         }
-        println(sum);
+        int mid = (i + j) / 2;
+        Tuple left = calculateArea(a, i, mid);
+        Tuple right = calculateArea(a, mid + 1, j);
+        merge(a, left, right);
+        return null;
+    }
+
+    private void merge(int[] a, Tuple left, Tuple right) {
+
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        LargestRectangleDC solution = new LargestRectangleDC();
         try {
             solution.initialize();
             solution.solve();
@@ -44,11 +73,12 @@ public class AVeryBigSum {
         out = new PrintWriter(output);
     }
 
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
+    private int[] nextIntArray(int n) throws IOException {
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = nextInt();
+        }
+        return a;
     }
 
     private int nextInt() throws IOException {
@@ -65,4 +95,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

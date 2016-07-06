@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.challenges.cloudera;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,45 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class CommonMinimum {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = nextInt();
         }
-        println(sum);
+        int m = nextInt();
+        int[] b = new int[m];
+        for (int i = 0; i < m; i++) {
+            b[i] = nextInt();
+        }
+
+        Set<Integer> aa = new HashSet<Integer>();
+        for (int i = 0; i < n; i++) {
+            aa.add(a[i]);
+        }
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < m; i++) {
+            if (aa.contains(b[i]) && b[i] < min) {
+                min = b[i];
+            }
+        }
+
+        System.out.println(min);
+
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        CommonMinimum solution = new CommonMinimum();
         try {
             solution.initialize();
             solution.solve();
@@ -44,13 +65,6 @@ public class AVeryBigSum {
         out = new PrintWriter(output);
     }
 
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
-    }
-
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +79,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

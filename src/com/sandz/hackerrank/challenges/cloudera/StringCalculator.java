@@ -1,65 +1,65 @@
 package com.sandz.hackerrank.challenges.cloudera;
 
-/* A Java program to evaluate a given expression where tokens are separated 
-by space.
-Test Cases:
-	"10 + 2 * 6"		 ---> 22
-	"100 * 2 + 12"		 ---> 212
-	"100 * ( 2 + 12 )"	 ---> 1400
-	"100 * ( 2 + 12 ) / 14" ---> 100 
-*/
 import java.util.Stack;
 
 public class StringCalculator {
-    public static int evaluate(String expression) {
-        char[] tokens = expression.toCharArray();
+    public long evaluateExpression(String expression) {
+        char[] characters = expression.trim().toCharArray();
 
-        Stack<Integer> values = new Stack<Integer>();
+        Stack<Long> values = new Stack<Long>();
 
         Stack<Character> ops = new Stack<Character>();
 
-        int length = tokens.length;
-        System.out.println(length);
+        int length = characters.length;
         for (int i = 0; i < length; i++) {
-            if (tokens[i] == ' ')
+            char character = characters[i];
+            if (character == ' ')
                 continue;
-            if (tokens[i] >= '0' && tokens[i] <= '9') {
-                StringBuffer sbuf = new StringBuffer();
-                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
-                    sbuf.append(tokens[i++]);
-                values.push(Integer.parseInt(sbuf.toString()));
+            if (character >= '0' && character <= '9') {
+                StringBuilder sbr = new StringBuilder();
+                while (i < length && characters[i] >= '0' && characters[i] <= '9') {
+                    character = characters[i++];
+                    sbr.append(character);
+                }
+                values.push(Long.parseLong(sbr.toString()));
             }
 
-            else if (tokens[i] == '(')
-                ops.push(tokens[i]);
+            if (i >= length) {
+                break;
+            }
 
-            else if (tokens[i] == ')') {
-                System.out.println("ddd");
+            character = characters[i];
+            if (character == '(')
+                ops.push(characters[i]);
+
+            else if (character == ')') {
                 while (ops.peek() != '(')
                     values.push(applyOp(ops.pop(), values.pop(), values.pop()));
                 ops.pop();
             }
 
-            // Current token is an operator.
-            else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/') {
-                while (!ops.empty() && hasPrecedence(tokens[i], ops.peek()))
-                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
-
-                ops.push(tokens[i]);
+            else if (character == '+' || character == '-' || character == '*' || character == '/') {
+                while (!ops.empty() && checkPrecedence(character, ops.peek())) {
+                    Character operator = ops.pop();
+                    Long value1 = values.pop();
+                    Long value2 = values.pop();
+                    values.push(applyOp(operator, value1, value2));
+                }
+                ops.push(character);
             }
         }
 
         while (!ops.empty()) {
             Character operator = ops.pop();
-            Integer value1 = values.pop();
-            Integer value2 = values.pop();
+            Long value1 = values.pop();
+            Long value2 = values.pop();
             values.push(applyOp(operator, value1, value2));
         }
 
         return values.pop();
     }
 
-    public static boolean hasPrecedence(char op1, char op2) {
+    public boolean checkPrecedence(char op1, char op2) {
         if (op2 == '(' || op2 == ')')
             return false;
         if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-'))
@@ -68,7 +68,7 @@ public class StringCalculator {
             return true;
     }
 
-    public static int applyOp(char op, int b, int a) {
+    public long applyOp(char op, long b, long a) {
         switch (op) {
         case '+':
             return a + b;
@@ -78,16 +78,17 @@ public class StringCalculator {
             return a * b;
         case '/':
             if (b == 0)
-                throw new UnsupportedOperationException("Cannot divide by zero");
+                throw new RuntimeException("Cannot divide by zero");
             return a / b;
         }
         return 0;
     }
 
     public static void main(String[] args) {
-        // System.out.println(StringCalculator.evaluate("10 + 2 * 6"));
-        // System.out.println(StringCalculator.evaluate("100 * 2 + 12"));
-        System.out.println(StringCalculator.evaluate("10 * ( 2 + 12 * 6 ) "));
-        System.out.println(StringCalculator.evaluate("100 * ( 2 + 12 ) / 14"));
+        StringCalculator calculator = new StringCalculator();
+        System.out.println(calculator.evaluateExpression("10 + 2 * 6"));
+        System.out.println(calculator.evaluateExpression("100 * 2 + 12"));
+        System.out.println(calculator.evaluateExpression("10*(2*12+6)"));
+        System.out.println(calculator.evaluateExpression("100*(4+2+5*2*2+(2) )/14"));
     }
 }

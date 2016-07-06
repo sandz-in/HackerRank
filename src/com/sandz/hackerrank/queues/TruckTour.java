@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.queues;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +8,42 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class TruckTour {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int[] pump = new int[n];
+        int[] dist = new int[n];
+        int[] diff = new int[n];
+        for (int i = 0; i < n; i++) {
+            pump[i] = nextInt();
+            dist[i] = nextInt();
+            diff[i] = pump[i] - dist[i];
         }
-        println(sum);
+        int dest = -1;
+        int remaining = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (remaining + diff[i] >= 0) {
+                if (dest == -1) {
+                    dest = i;
+                }
+                remaining += diff[i];
+            } else {
+                remaining = 0;
+                dest = -1;
+            }
+        }
+        println(dest);
+
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        TruckTour solution = new TruckTour();
         try {
             solution.initialize();
             solution.solve();
@@ -65,4 +85,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.queues;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,43 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class QueriesWithFixedLength {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int q = nextInt();
+        int[] seq = new int[n];
+        int[] queries = new int[q];
+        for (int i = 0; i < n; i++) {
+            seq[i] = nextInt();
         }
-        println(sum);
+        for (int i = 0; i < q; i++) {
+            queries[i] = nextInt();
+        }
+        Deque<Integer> dq = new LinkedList<Integer>();
+        for (int i = 0; i < queries.length; i++) {
+            int qsize = queries[i];
+            int j = 0;
+            int max = Integer.MIN_VALUE;
+            int min = Integer.MAX_VALUE;
+            while (dq.size() < qsize) {
+                max = Math.max(max, seq[j]);
+                dq.add(seq[j++]);
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        QueriesWithFixedLength solution = new QueriesWithFixedLength();
         try {
             solution.initialize();
             solution.solve();
@@ -51,6 +70,14 @@ public class AVeryBigSum {
         out.write(stringBuilder.toString());
     }
 
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
+    }
+
+    private double nextDouble() throws IOException {
+        return Double.parseDouble(nextToken());
+    }
+
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +92,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

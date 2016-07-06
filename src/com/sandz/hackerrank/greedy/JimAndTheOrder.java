@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.greedy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,54 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class JimAndTheOrder {
+
+    class Order implements Comparable<Order> {
+        public Order(int nextInt, int nextInt2, int nextInt3) {
+            i = nextInt;
+            s = nextInt2;
+            e = nextInt3;
+        }
+
+        Integer i;
+        int s;
+        int e;
+
+        @Override
+        public int compareTo(Order o) {
+            if (this.s + this.e < o.s + o.e)
+                return -1;
+            else if (this.s + this.e > o.s + o.e)
+                return 1;
+            return (this.i.compareTo(o.i));
+        }
+    }
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        List<Order> orders = new ArrayList<Order>();
+        for (int i = 1; i <= n; i++) {
+            Order o = new Order(i, nextInt(), nextInt());
+            orders.add(o);
         }
-        println(sum);
+        Collections.sort(orders);
+        for (Order order : orders) {
+            System.out.print(order.i + " ");
+        }
+        ;
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        JimAndTheOrder solution = new JimAndTheOrder();
         try {
             solution.initialize();
             solution.solve();
@@ -44,13 +74,6 @@ public class AVeryBigSum {
         out = new PrintWriter(output);
     }
 
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
-    }
-
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +88,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

@@ -1,4 +1,7 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.dynamic;
+/**
+ * Created by sandz on 10/29/15.
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +11,41 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class LongestIncreasingSubsequence {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
+        nextDouble();
+        nextInt();
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        for (int i = 0; i < n; i++) {
+
         }
-        println(sum);
+        int lis[] = new int[n];
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++)
+            lis[i] = 1;
+
+   /* Compute optimized LIS values in bottom up manner */
+        for (int i = 1; i < n; i++)
+            for (int j = 0; j < i; j++)
+                if (arr[i] > arr[j] && lis[i] < lis[j] + 1)
+                    lis[i] = lis[j] + 1;
+
+   /* Pick maximum of all LIS values */
+        int max = 0;
+        for (int i = 0; i < n; i++)
+            if (max < lis[i])
+                max = lis[i];
+        nextLong();
+        println("");
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        LongestIncreasingSubsequence solution = new LongestIncreasingSubsequence();
         try {
             solution.initialize();
             solution.solve();
@@ -49,6 +71,14 @@ public class AVeryBigSum {
         stringBuilder.append(o);
         stringBuilder.append("\n");
         out.write(stringBuilder.toString());
+    }
+
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
+    }
+
+    private double nextDouble() throws IOException {
+        return Double.parseDouble(nextToken());
     }
 
     private int nextInt() throws IOException {

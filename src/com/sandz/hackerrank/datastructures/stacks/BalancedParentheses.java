@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.datastructures.stacks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,44 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class BalancedParentheses {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        int t = nextInt();
+        for (int i = 0; i < t; i++) {
+            String token = nextToken();
+            Stack<Character> chars = new Stack<Character>();
+            for (int j = 0; j < token.length(); j++) {
+                Character character = token.charAt(j);
+                if (character == '(' || character == '[' || character == '{') {
+                    chars.push(character);
+                } else {
+                    if (!chars.isEmpty()) {
+                        if ((character == ')' && (chars.peek() == '(')) || (character == ']' && chars.peek() == '[')
+                                || (character == '}' && chars.peek() == '{')) {
+                            chars.pop();
+                        }
+                    } else {
+                        chars.push(character);
+                    }
+                }
+            }
+            if (chars.isEmpty())
+                System.out.println("YES");
+            else
+                System.out.println("NO");
         }
-        println(sum);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        BalancedParentheses solution = new BalancedParentheses();
         try {
             solution.initialize();
             solution.solve();
@@ -44,13 +64,6 @@ public class AVeryBigSum {
         out = new PrintWriter(output);
     }
 
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
-    }
-
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +78,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

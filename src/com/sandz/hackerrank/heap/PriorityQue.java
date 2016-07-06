@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.heap;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class PriorityQue {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
+
+        PriorityQueue<Integer> heap = new PriorityQueue<Integer>();
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        for (int i = 0; i < n; i++) {
+            int choice = nextInt();
+            switch (choice) {
+            case 1:
+                int no = nextInt();
+                heap.add(no);
+                break;
+            case 2:
+                int index = nextInt();
+                heap.remove(index);
+                break;
+            case 3:
+                System.out.println(heap.peek());
+            }
         }
-        println(sum);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        PriorityQue solution = new PriorityQue();
         try {
             solution.initialize();
             solution.solve();
@@ -44,13 +58,6 @@ public class AVeryBigSum {
         out = new PrintWriter(output);
     }
 
-    private void println(Object o) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(o);
-        stringBuilder.append("\n");
-        out.write(stringBuilder.toString());
-    }
-
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +72,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

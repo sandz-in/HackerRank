@@ -93,18 +93,20 @@ public class ConnectedCell {
         out.write(stringBuilder.toString());
     }
 
-    private int nextInt() throws IOException {
+    private int nextInt() {
         return Integer.parseInt(nextToken());
     }
 
-    private String nextToken() throws IOException {
-        while (st == null || !st.hasMoreTokens()) {
-            String line = br.readLine();
-            if (line == null) {
-                return null;
+    private String nextToken() {
+        try {
+            while (st == null || !st.hasMoreTokens()) {
+                String line = br.readLine();
+                if (line == null) {
+                    return null;
+                }
+                st = new StringTokenizer(line);
             }
-            st = new StringTokenizer(line);
-        }
+        } catch (Exception e) {}
         return st.nextToken();
     }
 }

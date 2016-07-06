@@ -1,4 +1,3 @@
-package com.sandz.hackerrank.warmup;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +7,19 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class Test {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
-        }
-        println(sum);
+        StringBuffer buffer = new StringBuffer("40,30");
+        System.out.println(buffer.reverse());
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        Test solution = new Test();
         try {
             solution.initialize();
             solution.solve();
@@ -51,6 +47,14 @@ public class AVeryBigSum {
         out.write(stringBuilder.toString());
     }
 
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
+    }
+
+    private double nextDouble() throws IOException {
+        return Double.parseDouble(nextToken());
+    }
+
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +69,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.datastructures.trees;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,24 +6,32 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class InorderTraversal {
+
+    public class Node {
+        int n;
+        Node left, right;
+
+        public Node(int n) {
+            this.n = n;
+        }
+    }
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
-        int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
-        }
-        println(sum);
+        LinkedList<Integer> s = new LinkedList<>();
+        System.out.println(Character.getNumericValue('1'));
+//        Queue<E>
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        InorderTraversal solution = new InorderTraversal();
         try {
             solution.initialize();
             solution.solve();
@@ -51,6 +59,14 @@ public class AVeryBigSum {
         out.write(stringBuilder.toString());
     }
 
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
+    }
+
+    private double nextDouble() throws IOException {
+        return Double.parseDouble(nextToken());
+    }
+
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
     }
@@ -65,4 +81,5 @@ public class AVeryBigSum {
         }
         return st.nextToken();
     }
+
 }

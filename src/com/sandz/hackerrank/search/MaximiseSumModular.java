@@ -1,4 +1,8 @@
-package com.sandz.hackerrank.warmup;
+package com.sandz.hackerrank.search;
+/**
+ * Created by sandz on 8/8/15.
+ * https://www.hackerrank.com/challenges/maximise-sum
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,22 +12,27 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
-public class AVeryBigSum {
+public class MaximiseSumModular {
+
     public BufferedReader br;
     public StringTokenizer st;
     public PrintWriter out;
 
     private void solve() throws IOException {
+        int t = nextInt();
+        long m = nextLong();
         int n = nextInt();
-        long sum = 0;
-        while (n-- > 0) {
-            sum += nextInt();
+        for (int i = 0; i < t; i++) {
+            int a[] = new int[n];
+            for (int j = 0; j < n; j++) {
+                a[j] = nextInt();
+
+            }
         }
-        println(sum);
     }
 
     public static void main(String[] args) throws IOException {
-        AVeryBigSum solution = new AVeryBigSum();
+        MaximiseSumModular solution = new MaximiseSumModular();
         try {
             solution.initialize();
             solution.solve();
@@ -53,6 +62,10 @@ public class AVeryBigSum {
 
     private int nextInt() throws IOException {
         return Integer.parseInt(nextToken());
+    }
+
+    private long nextLong() throws IOException {
+        return Long.parseLong(nextToken());
     }
 
     private String nextToken() throws IOException {
